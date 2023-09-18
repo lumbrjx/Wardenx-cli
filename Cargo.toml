@@ -1,9 +1,8 @@
 [package]
-name = "Wardenx-cli"
+name = "wardenx-cli"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-ratatui = { version = "0.23.0", features = ["all-widgets"]}
