@@ -1,23 +1,38 @@
+use crate::auth::auth;
 use std::io;
+use wardenx_core::{
+    decrypt_pass,
+    password::manager::manager::{get_all_passwords, get_password},
+};
+
 pub fn get(query: &String, flag: Option<String>) {
     if query == "get" {
         if flag == Some("-s".to_string()) {
             let mut label = String::new();
             println!("What's your secret name?");
-            // Read a line of input from the user and store it in the 'input' variable
             io::stdin()
                 .read_line(&mut label)
                 .expect("Failed to read line");
-
-            // Print the user's input
-            println!("You entered: {} ", label.trim());
+            let _ = auth();
+            let secret = get_password(label.trim().to_string());
+            match secret {
+                Ok(None) => println!("no secret found!"),
+                Ok(t) => println!(
+                    "secret name: {}, secert: {:?}",
+                    label.clone().trim(),
+                    decrypt_pass(t.unwrap().password)
+                ),
+                Err(err) => println!("{}", err),
+            }
         } else if flag == Some("-h".to_string()) {
             println!("history retrieved")
         } else if flag == Some("-a".to_string()) {
-            println!("all secrets retrieved")
+            let labels = get_all_passwords();
+            for secret in labels.unwrap().iter() {
+                println!("{}", secret.label)
+            }
         } else {
             println!("Please enter a valid flag")
         }
     }
-    println!("Searching for {}", query);
 }

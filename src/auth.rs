@@ -7,7 +7,6 @@ pub fn auth() {
     let user = get_user();
     let master_pass = user.unwrap().unwrap().master_password;
     while master_pass != encrypt_pass(password.trim().to_string()) {
-        println!("the enterd pass {}", password.clone());
         password = "".to_string();
         println!("master password:");
 
