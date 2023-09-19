@@ -1,5 +1,6 @@
 use crate::auth::auth;
 use std::io;
+use wardenx_core::profile::history::history::get_history;
 use wardenx_core::{
     decrypt_pass,
     password::manager::manager::{get_all_passwords, get_password},
@@ -25,7 +26,10 @@ pub fn get(query: &String, flag: Option<String>) {
                 Err(err) => println!("{}", err),
             }
         } else if flag == Some("-h".to_string()) {
-            println!("history retrieved")
+            let records = get_history();
+            for secret in records.unwrap().iter() {
+                println!("{} at {}", &secret.record, secret.date_time)
+            }
         } else if flag == Some("-a".to_string()) {
             let labels = get_all_passwords();
             for secret in labels.unwrap().iter() {
