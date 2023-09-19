@@ -1,4 +1,8 @@
+use crate::auth::auth;
 use std::io;
+use wardenx_core::encrypt::*;
+
+use wardenx_core::password::manager::manager::Secret;
 pub fn add(query: &String) {
     if query == "add" {
         let mut label = String::new();
@@ -12,9 +16,18 @@ pub fn add(query: &String) {
         io::stdin()
             .read_line(&mut secret)
             .expect("Failed to read line");
-
+        if label.trim().len() == 0 || secret.trim().len() == 0 {
+            panic!("label, secret. Can't be NULL")
+        }
+        let _ = auth();
         // Print the user's input
-        println!("You entered: {} {} ", label.trim(), secret.trim(),);
+        let a_secret = Secret {
+            label: label.trim().to_string(),
+            password: encrypt_pass(secret.trim().to_string()),
+        };
+        match a_secret.create_secret() {
+            Ok(t) => t,
+            Err(err) => println!("{}", err),
+        };
     }
-    println!("Searching for {}", query);
 }

@@ -11,6 +11,7 @@ use help::help;
 mod init;
 use add::add;
 use init::init;
+mod auth;
 // init => create tables, and username, password, recovery_key
 // add *label* *passowrd*
 // del -s *label*
