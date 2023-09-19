@@ -12,6 +12,8 @@ mod init;
 use add::add;
 use init::init;
 mod auth;
+mod recovery;
+use recovery::recovery;
 // init => create tables, and username, password, recovery_key
 // add *label* *passowrd*
 // del -s *label*
@@ -25,6 +27,7 @@ mod auth;
 // get -s *label*
 // get -a
 // help
+// recover
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -38,5 +41,5 @@ fn main() {
     let _ = del(query, flag.clone());
     let _ = get(query, flag.clone());
     let _ = edit(query, flag.clone());
-    println!("your flag {:?}", flag)
+    let _ = recovery(query);
 }
