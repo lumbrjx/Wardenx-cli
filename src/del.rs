@@ -1,4 +1,8 @@
 use std::io;
+
+use wardenx_core::{password::manager::manager::*, profile::history::history::delete_all_records};
+
+use crate::auth::auth;
 pub fn del(query: &String, flag: Option<String>) {
     if query == "del" {
         if flag == Some("-s".to_string()) {
@@ -8,12 +12,13 @@ pub fn del(query: &String, flag: Option<String>) {
             io::stdin()
                 .read_line(&mut label)
                 .expect("Failed to read line");
-            println!("Add your secret");
+            let _ = auth();
+            let _ = delete_secret(label.trim().to_string());
 
             // Print the user's input
-            println!("You entered: {} ", label.trim());
         } else if flag == Some("-h".to_string()) {
-            println!("history deleted")
+            let _ = auth();
+            let _ = delete_all_records();
         } else {
             println!("Please enter a valid flag")
         }
