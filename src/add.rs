@@ -29,5 +29,6 @@ pub fn add(query: &String) {
             Ok(t) => t,
             Err(err) => println!("{}", err),
         };
+        println!("new secret is added!")
     }
 }

@@ -14,14 +14,15 @@ pub fn del(query: &String, flag: Option<String>) {
                 .expect("Failed to read line");
             let _ = auth();
             let _ = delete_secret(label.trim().to_string());
+            println!("secret deleted!")
 
             // Print the user's input
         } else if flag == Some("-h".to_string()) {
             let _ = auth();
             let _ = delete_all_records();
+            println!("history is cleared")
         } else {
             println!("Please enter a valid flag")
         }
     }
-    println!("Searching for {}", query);
 }
