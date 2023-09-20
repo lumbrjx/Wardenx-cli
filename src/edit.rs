@@ -15,18 +15,15 @@ pub fn edit(query: &String, flag: Option<String>) {
             let old_username = user.unwrap().unwrap().username;
             let mut username = String::new();
             println!("Add your new username");
-            // Read a line of input from the user and store it in the 'input' variable
             io::stdin()
                 .read_line(&mut username)
                 .expect("Failed to read line");
             if username.trim().len() == 0 {
                 panic!("username can't be NULL")
             }
-            //password checking
             let _ = auth();
             let _ = edit_username(&old_username, username.trim().to_string());
             println!("user edited!")
-            // Print the user's input
         } else if flag == Some("-p".to_string()) {
             let user = get_user();
             let username = user.unwrap().unwrap().username;
@@ -48,7 +45,6 @@ pub fn edit(query: &String, flag: Option<String>) {
             let mut key = String::new();
             let _ = auth();
             println!("new key:");
-            // Read a line of input from the user and store it in the 'input' variable
             io::stdin()
                 .read_line(&mut key)
                 .expect("Failed to read line");
@@ -57,18 +53,14 @@ pub fn edit(query: &String, flag: Option<String>) {
             }
             let _ = edit_recovery_key(&username, encrypt_pass(key.trim().to_string()));
             println!("recovery key edited!")
-
-            // password checking
         } else if flag == Some("-l".to_string()) {
             let mut label = String::new();
             let mut new_label = String::new();
             println!("Add the secret you want to edit:");
-            // Read a line of input from the user and store it in the 'input' variable
             io::stdin()
                 .read_line(&mut label)
                 .expect("Failed to read line");
             println!("New label:");
-            // Read a line of input from the user and store it in the 'input' variable
             io::stdin()
                 .read_line(&mut new_label)
                 .expect("Failed to read line");
@@ -77,18 +69,15 @@ pub fn edit(query: &String, flag: Option<String>) {
             }
             let _ = auth();
             let _ = edit_secret_label(&label.trim().to_string(), new_label.trim().to_string());
-            // password checking
             println!("secret edited!")
         } else if flag == Some("-s".to_string()) {
             let mut old_label = String::new();
             let mut new_label = String::new();
             println!("Add the secret you want to edit:");
-            // Read a line of input from the user and store it in the 'input' variable
             io::stdin()
                 .read_line(&mut old_label)
                 .expect("Failed to read line");
             println!("New secret:");
-            // Read a line of input from the user and store it in the 'input' variable
             io::stdin()
                 .read_line(&mut new_label)
                 .expect("Failed to read line");
@@ -100,7 +89,6 @@ pub fn edit(query: &String, flag: Option<String>) {
                 &old_label.trim().to_string(),
                 encrypt_pass(new_label.trim().to_string()),
             );
-            // password checking
             println!("secret edited!")
         } else {
             println!("Please enter a valid flag")

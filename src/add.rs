@@ -8,7 +8,6 @@ pub fn add(query: &String) {
         let mut label = String::new();
         let mut secret = String::new();
         println!("What's your secret name?");
-        // Read a line of input from the user and store it in the 'input' variable
         io::stdin()
             .read_line(&mut label)
             .expect("Failed to read line");
@@ -20,7 +19,6 @@ pub fn add(query: &String) {
             panic!("label, secret. Can't be NULL")
         }
         let _ = auth();
-        // Print the user's input
         let a_secret = Secret {
             label: label.trim().to_string(),
             password: encrypt_pass(secret.trim().to_string()),

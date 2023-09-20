@@ -14,20 +14,10 @@ use init::init;
 mod auth;
 mod recovery;
 use recovery::recovery;
-// init => create tables, and username, password, recovery_key
-// add *label* *passowrd*
-// del -s *label*
-// del -h
-// edit -u *new username*
-// edit -p *old password* *new passowrd*
-// edit -k *password* *new key*
-// edit -l *old label* *new label*
-// edit -s *label* *new passowrd*
-// get -h => shows logs
-// get -s *label*
-// get -a
-// help
-// recover
+mod generate;
+use generate::generate;
+mod hash;
+use hash::hash;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -42,4 +32,6 @@ fn main() {
     let _ = get(query, flag.clone());
     let _ = edit(query, flag.clone());
     let _ = recovery(query);
+    let _ = generate(query);
+    let _ = hash(query);
 }
