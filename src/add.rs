@@ -21,7 +21,7 @@ pub fn add(query: &String) {
         let _ = auth();
         let a_secret = Secret {
             label: label.trim().to_string(),
-            password: encrypt_pass(secret.trim().to_string()),
+            password: encrypt_pass(secret.trim().to_string(), secret.trim().to_string()),
         };
         match a_secret.create_secret() {
             Ok(t) => t,

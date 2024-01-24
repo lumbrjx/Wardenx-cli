@@ -6,7 +6,8 @@ pub fn recovery(query: &String) {
         let mut recovery = String::new();
         let user = get_user();
         let recovery_key = user.unwrap().unwrap().recovery_key;
-        while recovery_key != encrypt_pass(recovery.trim().to_string()) {
+        while recovery_key != encrypt_pass(recovery.trim().to_string(), recovery.trim().to_string())
+        {
             recovery = "".to_string();
             println!("recovery key:");
             io::stdin()
@@ -23,7 +24,13 @@ pub fn recovery(query: &String) {
         if new_password.trim().len() == 0 {
             panic!("passowrd can't be NULL")
         }
-        let _ = edit_master_password(&username, encrypt_pass(new_password.trim().to_string()));
+        let _ = edit_master_password(
+            &username,
+            encrypt_pass(
+                new_password.trim().to_string(),
+                new_password.trim().to_string(),
+            ),
+        );
         println!("master password edited!")
     }
 }

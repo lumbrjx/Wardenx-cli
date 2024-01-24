@@ -33,8 +33,14 @@ pub fn init(query: &String) {
         }
         let user = User {
             username: username.trim().to_string(),
-            master_password: encrypt_pass(master_password.trim().to_string()),
-            recovery_key: encrypt_pass(recovery_key.trim().to_string()),
+            master_password: encrypt_pass(
+                master_password.trim().to_string(),
+                master_password.trim().to_string(),
+            ),
+            recovery_key: encrypt_pass(
+                recovery_key.trim().to_string(),
+                recovery_key.trim().to_string(),
+            ),
         };
         match user.create_user() {
             Ok(t) => t,

@@ -18,11 +18,14 @@ pub fn get(query: &String, flag: Option<String>) {
             let secret = get_password(label.trim().to_string());
             match secret {
                 Ok(None) => println!("no secret found!"),
-                Ok(t) => println!(
-                    "secret name: {}, secert: {:?}",
-                    label.clone().trim(),
-                    decrypt_pass(t.unwrap().password)
-                ),
+                Ok(t) => {
+                    let x = t.unwrap().password;
+                    println!(
+                        "secret name: {}, secert: {:?}",
+                        label.clone().trim(),
+                        decrypt_pass(x.clone(), x)
+                    )
+                }
                 Err(err) => println!("{}", err),
             }
         } else if flag == Some("-h".to_string()) {

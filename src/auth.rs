@@ -6,7 +6,7 @@ pub fn auth() {
     let mut password = String::new();
     let user = get_user();
     let master_pass = user.unwrap().unwrap().master_password;
-    while master_pass != encrypt_pass(password.trim().to_string()) {
+    while master_pass != encrypt_pass(password.trim().to_string(), password.trim().to_string()) {
         password = "".to_string();
         println!("master password:");
 

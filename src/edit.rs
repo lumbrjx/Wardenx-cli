@@ -37,7 +37,13 @@ pub fn edit(query: &String, flag: Option<String>) {
             if new_password.trim().len() == 0 {
                 panic!("passowrd can't be NULL")
             }
-            let _ = edit_master_password(&username, encrypt_pass(new_password.trim().to_string()));
+            let _ = edit_master_password(
+                &username,
+                encrypt_pass(
+                    new_password.trim().to_string(),
+                    new_password.trim().to_string(),
+                ),
+            );
             println!("master password edited!")
         } else if flag == Some("-k".to_string()) {
             let user = get_user();
@@ -51,7 +57,10 @@ pub fn edit(query: &String, flag: Option<String>) {
             if key.trim().len() == 0 {
                 panic!("recovery key can't be NULL")
             }
-            let _ = edit_recovery_key(&username, encrypt_pass(key.trim().to_string()));
+            let _ = edit_recovery_key(
+                &username,
+                encrypt_pass(key.trim().to_string(), key.trim().to_string()),
+            );
             println!("recovery key edited!")
         } else if flag == Some("-l".to_string()) {
             let mut label = String::new();
@@ -87,7 +96,7 @@ pub fn edit(query: &String, flag: Option<String>) {
             let _ = auth();
             let _ = edit_secret_password(
                 &old_label.trim().to_string(),
-                encrypt_pass(new_label.trim().to_string()),
+                encrypt_pass(new_label.trim().to_string(), new_label.trim().to_string()),
             );
             println!("secret edited!")
         } else {
